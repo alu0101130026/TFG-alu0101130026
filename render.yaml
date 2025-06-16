@@ -1,6 +1,11 @@
 services:
   - type: web
     name: array-ortogonal
-    runtime: python
+    env: python
     buildCommand: ""
     startCommand: "python app.py"
+    envVars:
+    - key: PYTHON_VERSION
+      value: 3.8
+    - key: HX_LICENSE_PATH
+      value: /opt/render/project/src/license.dat
