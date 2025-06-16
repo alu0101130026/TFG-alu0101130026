@@ -6,6 +6,6 @@ services:
     startCommand: "python app.py"
     envVars:
     - key: PYTHON_VERSION
-      value: 3.8
+      value: 3.8.17
     - key: HX_LICENSE_PATH
       value: /opt/render/project/src/license.dat
