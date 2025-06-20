@@ -49,9 +49,45 @@
         <div class="alert alert-danger mt-3">{{ error }}</div>
     {% endif %}
 
+    {% if params %}
+    <div class="card border-info shadow-sm mt-5 rounded">
+    <div class="card-header bg-info text-white fw-bold text-center">
+        Parámetros utilizados
+    </div>
+    <div class="card-body px-4 py-3">
+        <div class="row text-center">
+        <div class="col">
+            <span class="text-secondary small">N (filas)</span><br>
+            <span class="fw-semibold fs-5">{{ params.N }}</span>
+        </div>
+        <div class="col">
+            <span class="text-secondary small">k (columnas)</span><br>
+            <span class="fw-semibold fs-5">{{ params.k }}</span>
+        </div>
+        <div class="col">
+            <span class="text-secondary small">s (símbolos)</span><br>
+            <span class="fw-semibold fs-5">{{ params.s }}</span>
+        </div>
+        <div class="col">
+            <span class="text-secondary small">t (fuerza)</span><br>
+            <span class="fw-semibold fs-5">{{ params.t }}</span>
+        </div>
+        </div>
+    </div>
+    </div>
+    {% endif %}
+
+
+
     {% if objective %}
     <div class="alert alert-info mt-4">
         <strong>Valor óptimo encontrado:</strong> {{ objective }} filas seleccionadas
+    </div>
+    {% endif %}
+
+    {% if time %}
+    <div class="alert alert-secondary mt-2">
+        <strong>Tiempo de resolución:</strong> {{ time }} segundos
     </div>
     {% endif %}
 

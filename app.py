@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request
-from oa_solver import solve_oa
+from oa_solver import solve_oa        # Si queremos que use Hexaly
+#from oa_solver_gurobi import solve_oa   # Si queremos que use Gurobi
+
 import os
 
 app = Flask(__name__)
@@ -11,6 +13,8 @@ def index():
     result = None
     error = None
     objective = None
+    time_taken = None
+    params = None
     if request.method == "POST":
         try:
             N = int(request.form.get("N"))
@@ -21,11 +25,14 @@ def index():
             if isinstance(output, dict):
                 result = output["rows"]
                 objective = output["objective"]
+                time_taken = output.get("time")
             else:
-                result = output  # será string de error
+                result = output  
         except Exception as e:
             error = "Error en los datos ingresados: {}".format(str(e))
-    return render_template("index.html", result=result, objective=objective, error=error)
+        params = {"N": N, "k": k, "s": s, "t": t}
+
+    return render_template("index.html", result=result, objective=objective, error=error, time=time_taken, params=params)
 
 
 
