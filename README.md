@@ -28,34 +28,37 @@ git clone https://github.com/tuusuario/oa-web.git
 cd oa-web
 ```
 
-2. Crea y activa un entorno virtual
+### 2. Crea y activa un entorno virtual
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-3. Instala dependencias
+### 3. Instala dependencias
 ```bash
 pip install -r requirements.txt
 pip install hexaly -i https://pip.hexaly.com   # Solo si usas Hexaly
 ```
 Si usas Gurobi, asegúrate de tenerlo instalado y licenciado localmente.
 
-4. Ejecuta la app
+### 4. Ejecuta la app
 ```bash
 python app.py
 ```
-5. Accede desde tu navegador en http://localhost:5000
+### 5. Accede desde tu navegador en http://localhost:5000
 
-⚙️ Solvers disponibles
-Solver	Archivo	Requisitos
-Hexaly	oa_solver.py	Hexaly Optimizer + licencia
-Gurobi	oa_solver_gurobi.py	Gurobi instalado y activado
+## ⚙️ Solvers disponibles
 
-Puedes alternar entre ellos editando app.py:
-```bash
-from oa_solver_gurobi import solve_oa  # Gurobi
-# from oa_solver import solve_oa      # Hexaly
+| Solver  | Archivo               | Requisitos                    |
+|---------|------------------------|-------------------------------|
+| Hexaly  | `oa_solver.py`         | Hexaly Optimizer + licencia  |
+| Gurobi  | `oa_solver_gurobi.py`  | Gurobi instalado y activado  |
+
+Puedes alternar entre ellos editando el archivo `app.py`:
+
+```python
+from oa_solver_gurobi import solve_oa  # Usar Gurobi
+# from oa_solver import solve_oa      # Usar Hexaly
 ```
 
 💡 Características
@@ -68,22 +71,25 @@ from oa_solver_gurobi import solve_oa  # Gurobi
 
     Indicadores de tiempo de resolución
 
-📁 Estructura del proyecto
+## 📁 Estructura del proyecto
 
-├── app.py
-├── oa_solver.py               # Versión con Hexaly
-├── oa_solver_gurobi.py        # Versión con Gurobi
-├── requirements.txt
-├── render.yaml                # Configuración para despliegue en Render
+```text
+├── app.py                    # Aplicación principal Flask
+├── oa_solver.py              # Solver con Hexaly
+├── oa_solver_gurobi.py       # Solver con Gurobi
+├── requirements.txt          # Dependencias del proyecto
+├── render.yaml               # Configuración para despliegue en Render
+├── license.dat               # Archivo de licencia Hexaly 
 ├── templates/
-│   └── index.html             # Interfaz web
+│   └── index.html            # Interfaz web 
+```
 
-✍️ Autor
+## ✍️ Autor
 
 Diego Díaz Fernández
 alu0101130026@ull.edu.es
 Universidad de La Laguna
 
-🌐 Despliegue online
+## 🌐 Despliegue online
 
-[Generador](https://array-ortogonal.onrender.com) 
+Web de la herramienta: [Generador](https://array-ortogonal.onrender.com) 
