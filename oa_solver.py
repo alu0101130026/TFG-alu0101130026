@@ -23,7 +23,6 @@ import itertools
 import numpy as np
 from hexaly.optimizer import HexalyOptimizer, HxModel, HxSolutionStatus
 
-
 def solve_oa(N, k, s, t):
     start_time = time.time()
     try:
@@ -51,6 +50,8 @@ def solve_oa(N, k, s, t):
             return tuple(r)
 
         with HexalyOptimizer() as optimizer:
+            optimizer.param.set_time_limit(100)  
+
             model = HxModel(optimizer)
 
             x = {}
@@ -68,12 +69,14 @@ def solve_oa(N, k, s, t):
             optimizer.solve()
             elapsed = round(time.time() - start_time, 4)
 
-            if optimizer.solution.status == HxSolutionStatus.OPTIMAL:
+            status = optimizer.solution.status
+            if status == HxSolutionStatus.OPTIMAL:
                 result = [rv for rv in allrows if x[tuple(rv)].value == 1]
                 obj_value = int(optimizer.solution.get_objective_bound(0))
                 return {"rows": result, "objective": obj_value, "time": elapsed}
+
             else:
-                return "No se encontró una solución óptima"
+                return "Se alcanzó el límite de 100 segundos sin encontrar solución óptima."
 
     except Exception as e:
         return "Error interno: {}".format(str(e))
